@@ -1,0 +1,19 @@
+<!-- blog/templates/comment_create.html -->>
+{% extends 'base.html%}
+
+{% block content %}
+<h1>{{post.title }}</h1>
+<p>{{ post.content }}</p>
+
+<h2>Comments </h2>
+<ul>
+    {% for comments in comments %}
+    <li>{{ comment.content }} ({{ comment.created_at }})</li>
+    {% endfor %}
+</ul>
+<form method="post">
+    {% csrf_token %}
+    <textarea name="content"></textarea>
+    <button type="submit"> Create Comment</button>
+    </form>
+<h1> Create Coment</h1>

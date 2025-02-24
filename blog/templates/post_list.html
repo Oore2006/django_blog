@@ -1,0 +1,12 @@
+<!-- blog/templates/post_list.html -->>
+{% extends 'base.html' %}
+
+{% block content%}
+
+<h1> Post List </h1>
+<ul>
+    {% for post in posts %}
+    <li>{{post.title}} ({{post.created_at }})</li>
+    {% endfor %}
+</ul>
+{% endblock%}
