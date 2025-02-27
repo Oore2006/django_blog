@@ -1,4 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import 
+from django.views.generic import ListView, DetailView
+
+class HomeView(listView):
+    model = Post    
+    template_name = 'home.html'
+
 # from .models import Post, Comment
 # # Create your views here.
 
@@ -19,5 +25,7 @@ from django.shortcuts import render
 #     return render(request, 'blog/comment_create.html')
 
 
-def home(request):
-    return render(request, 'home.html', {})
+# code to post home(hello world)
+
+# def home(request):
+#     return render(request, 'home.html', {})
