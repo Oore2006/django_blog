@@ -1,5 +1,5 @@
 <!-- blog/templates/comment_create.html -->>
-{% extends 'base.html%}
+<!-- {% extends 'base.html%}
 
 {% block content %}
 <h1>{{post.title }}</h1>
@@ -16,4 +16,69 @@
     <textarea name="content"></textarea>
     <button type="submit"> Create Comment</button>
     </form>
-<h1> Create Coment</h1>
+<h1> Create Coment</h1> -->
+
+
+{% extends "blog/base.html" %}
+{% block content %}
+    <article class="">
+        <div class="card mb-4">
+            <h1 class="card-title">{{ object.title }}</h1>
+            <p class="text-muted">By <a href="{% url 'user-posts' object.author.username %}">{{ object.author}}</a> on{{ object.date_posted|date:"F d, Y"}} </p>
+
+            {% if object.author == user %}
+            <div class="mb-3">
+                <a class="btn btn-sm btn-outline-secondary" href="{% url 'post-update object.id' %}">Update</a>
+                <a class="btn btn-sm btn-outline-danger" href="{% url 'post-delete' object.id %}">Delete</a>
+            </div>
+        {% endif %}
+
+        <div class="card-text">
+            {{ object.content|linereaks }}
+        </div>
+        </div>
+    </article>
+    <div class="card mb-4">
+        <div class="card-header">
+            <h3>Comments ({{ object.comment.count }})</h3>
+        </div>
+        <div card-body>
+            {% if user.is_authenticated %}
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="form-group mb-3">
+                        {{ comment_form.content }}
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Comment</button>
+
+        </div>
+        <div class="card-body">
+           {% if user.is_authenticated %} 
+           <form  method="POST" action="">
+                {% csrf_token %}
+                <div class="form-group mb-3">
+                    {{ comment_form.content }}
+                </div>
+                <button type="submit" class="btn btn-primary">Add Comment</button>
+           </form>
+           {% else %}
+                <p>Please <a href="{% url 'login' %}">log in </a> to leave a comment</p>
+            {% endif %}
+        </div>
+    </div>
+
+    {% for comment in object.comments.all %}
+        <div class="card mb-2">
+            <div class="card-body">
+                <p class="mb-1">{{ comment.author }}</p>
+                   <small class="text-muted">By {{ comment.author }} on {{comment.date_posted|date: "F d, Y"}} </small> 
+            </div>
+        </div>
+    {% empty %}
+        <div class="card">
+            <div class="card-body text-center">
+                <p>No comments yet.</p>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock content %}    

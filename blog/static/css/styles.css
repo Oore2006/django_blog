@@ -1,0 +1,13 @@
+body{
+    background-color: 2rem;
+}
+.site-header{
+    margin-bottom: 2rem;
+}
+
+.card {
+    box-shadow: 0 2px 5px rgba(0,0 ,0 ,0.1);
+}
+.card-title a:hover {
+    color: #007bff;
+}

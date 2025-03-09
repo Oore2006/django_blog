@@ -1,0 +1,12 @@
+{% extends blogbase.html" %}
+{% block content %}
+    <div class="card">
+        <div class="card-header">
+            <h2>You have been logged out</h2>
+        </div>
+        <div class="card-body">
+            <p>Click <a href="{% url 'login' %}">here</a>to log in again.</p>
+
+        </div>
+    </div>
+{% endblock content %}
